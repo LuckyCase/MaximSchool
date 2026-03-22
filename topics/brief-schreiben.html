@@ -186,7 +186,7 @@
   .letter-paper::before {
     content: '';
     position: absolute;
-    left: 42px;
+    left: 8px;
     top: 0; bottom: 0;
     width: 2px;
     background: #FFD93D;
@@ -313,6 +313,56 @@
     display: flex;
     gap: 8px;
   }
+  /* LETTER SWITCHER */
+  .letter-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    gap: 8px;
+  }
+  .letter-nav-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 2px solid #DDD;
+    background: white;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .letter-nav-btn:hover { border-color: var(--blue); background: #E3F2FD; }
+  .letter-nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .letter-nav-btn:disabled:hover { border-color: #DDD; background: white; }
+  .letter-nav-info {
+    font-size: 0.82rem;
+    color: #888;
+    text-align: center;
+  }
+  .letter-nav-topic {
+    font-weight: 700;
+    color: #555;
+    font-size: 0.88rem;
+  }
+  .letter-example { display: none; animation: fadeIn 0.3s ease; }
+  .letter-example.active { display: block; }
+  .letter-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .letter-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #DDD;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .letter-dot.active { background: var(--orange); transform: scale(1.3); }
 </style>
 </head>
 <body>
@@ -375,35 +425,131 @@
       </div>
     </div>
   </div>
-  <!-- TAB 2: ПРИМЕР ПИСЬМА -->
+  <!-- TAB 2: ПРИМЕРЫ ПИСЕМ -->
   <div class="section" id="tab1">
-    <h2 class="section-head">&#128196; Пример письма</h2>
-    <div class="letter-paper">
-      <p style="text-align:right; color:#555; margin-bottom:20px;">
-        M&ouml;nchengladbach, den 22. M&auml;rz 2026
-        <span class="letter-label lbl-1">&#9312; Datum</span>
-      </p>
-      <p style="margin-bottom:16px;">
-        Liebe Anna,
-        <span class="letter-label lbl-2">&#9313; Anrede</span>
-      </p>
-      <p style="margin-bottom:14px;">
-        ich habe mich sehr &uuml;ber deinen Brief gefreut! Wie geht es dir?
-        <span class="letter-label lbl-3">&#9314; Einleitung</span>
-      </p>
-      <p style="margin-bottom:14px;">
-        Am Wochenende war ich mit meiner Familie im Zoo. Wir haben viele Tiere gesehen. Am liebsten mochte ich die Giraffen, weil sie so gro&szlig; und lustig sind. Meine kleine Schwester hatte ein bisschen Angst vor den L&ouml;wen!
-        <span class="letter-label lbl-4">&#9315; Hauptteil</span>
-      </p>
-      <p style="margin-bottom:20px;">
-        Was hast du am Wochenende gemacht? Schreib mir bald!
-        <span class="letter-label lbl-5">&#9316; Schluss</span>
-      </p>
-      <p>
-        Viele liebe Gr&uuml;&szlig;e,<br>
-        <b>dein Max</b>
-      </p>
+    <h2 class="section-head">&#128196; Примеры писем</h2>
+    <div class="letter-nav">
+      <button class="letter-nav-btn" onclick="showLetter(-1)" id="lprev">&#8592;</button>
+      <div style="text-align:center;">
+        <div class="letter-nav-topic" id="ltopic">Im Zoo</div>
+        <div class="letter-nav-info"><span id="lnum">1</span> / <span id="ltotal">8</span></div>
+      </div>
+      <button class="letter-nav-btn" onclick="showLetter(1)" id="lnext">&#8594;</button>
     </div>
+
+    <!-- ПИСЬМО 1: Im Zoo (с метками структуры) -->
+    <div class="letter-example active" id="letter0">
+      <div class="letter-paper">
+        <p style="text-align:right; color:#555; margin-bottom:20px;">
+          M&ouml;nchengladbach, den 22. M&auml;rz 2026
+          <span class="letter-label lbl-1">&#9312; Datum</span>
+        </p>
+        <p style="margin-bottom:16px;">
+          Liebe Anna,
+          <span class="letter-label lbl-2">&#9313; Anrede</span>
+        </p>
+        <p style="margin-bottom:14px;">
+          ich habe mich sehr &uuml;ber deinen Brief gefreut! Wie geht es dir?
+          <span class="letter-label lbl-3">&#9314; Einleitung</span>
+        </p>
+        <p style="margin-bottom:14px;">
+          Am Wochenende war ich mit meiner Familie im Zoo. Wir haben viele Tiere gesehen. Am liebsten mochte ich die Giraffen, weil sie so gro&szlig; und lustig sind. Meine kleine Schwester hatte ein bisschen Angst vor den L&ouml;wen!
+          <span class="letter-label lbl-4">&#9315; Hauptteil</span>
+        </p>
+        <p style="margin-bottom:20px;">
+          Was hast du am Wochenende gemacht? Schreib mir bald!
+          <span class="letter-label lbl-5">&#9316; Schluss</span>
+        </p>
+        <p>Viele liebe Gr&uuml;&szlig;e,<br><b>dein Max</b></p>
+      </div>
+    </div>
+
+    <!-- ПИСЬМО 2: Geburtstagsparty -->
+    <div class="letter-example" id="letter1">
+      <div class="letter-paper">
+        <p style="text-align:right; color:#555; margin-bottom:20px;">M&ouml;nchengladbach, den 3. M&auml;rz 2026</p>
+        <p style="margin-bottom:16px;">Liebe Anna,</p>
+        <p style="margin-bottom:14px;">wie geht es dir? Ich hoffe, du bist gesund und munter!</p>
+        <p style="margin-bottom:14px;">Ich schreibe dir, weil ich bald Geburtstag habe. Am 15. M&auml;rz werde ich zehn Jahre alt! Ich mache eine gro&szlig;e Party bei mir zu Hause. Wir werden Kuchen essen, Spiele spielen und im Garten toben. Mama backt eine Schokoladentorte mit Erdbeeren.</p>
+        <p style="margin-bottom:20px;">Kannst du zu meiner Party kommen? Ich w&uuml;rde mich sehr freuen!</p>
+        <p>Viele liebe Gr&uuml;&szlig;e,<br><b>deine Sophie</b></p>
+      </div>
+    </div>
+
+    <!-- ПИСЬМО 3: Urlaub am Meer -->
+    <div class="letter-example" id="letter2">
+      <div class="letter-paper">
+        <p style="text-align:right; color:#555; margin-bottom:20px;">M&ouml;nchengladbach, den 6. M&auml;rz 2026</p>
+        <p style="margin-bottom:16px;">Lieber Tom,</p>
+        <p style="margin-bottom:14px;">ich hoffe, es geht dir gut! Mir geht es super!</p>
+        <p style="margin-bottom:14px;">Ich muss dir etwas Tolles erz&auml;hlen. In den Osterferien fahren wir ans Meer nach Nordsee. Wir bleiben eine ganze Woche in einem Ferienhaus. Ich m&ouml;chte Sandburgen bauen und Muscheln sammeln. Papa hat gesagt, wir gehen auch Krabben fangen.</p>
+        <p style="margin-bottom:20px;">Was machst du in den Ferien? F&auml;hrt ihr auch irgendwohin?</p>
+        <p>Herzliche Gr&uuml;&szlig;e,<br><b>dein Lukas</b></p>
+      </div>
+    </div>
+
+    <!-- ПИСЬМО 4: Neues Haustier -->
+    <div class="letter-example" id="letter3">
+      <div class="letter-paper">
+        <p style="text-align:right; color:#555; margin-bottom:20px;">M&ouml;nchengladbach, den 10. M&auml;rz 2026</p>
+        <p style="margin-bottom:16px;">Liebe Mia,</p>
+        <p style="margin-bottom:14px;">wie geht es dir? Ich habe eine tolle Neuigkeit f&uuml;r dich!</p>
+        <p style="margin-bottom:14px;">Stell dir vor, wir haben einen kleinen Hund bekommen! Er hei&szlig;t Bello und ist ein brauner Dackel. Er ist erst drei Monate alt und sehr verspielt. Jeden Tag gehe ich mit ihm im Park spazieren. Am liebsten spielt er mit seinem roten Ball.</p>
+        <p style="margin-bottom:20px;">Hast du Lust, ihn mal zu besuchen? Du kannst gerne am Wochenende kommen!</p>
+        <p>Ganz liebe Gr&uuml;&szlig;e,<br><b>deine Emma</b></p>
+      </div>
+    </div>
+
+    <!-- ПИСЬМО 5: Klassenfahrt -->
+    <div class="letter-example" id="letter4">
+      <div class="letter-paper">
+        <p style="text-align:right; color:#555; margin-bottom:20px;">M&ouml;nchengladbach, den 13. M&auml;rz 2026</p>
+        <p style="margin-bottom:16px;">Lieber Max,</p>
+        <p style="margin-bottom:14px;">ich hoffe, dir geht es gut! Bei mir ist gerade sehr viel los.</p>
+        <p style="margin-bottom:14px;">Letzte Woche waren wir mit der Klasse auf Klassenfahrt in der Eifel. Wir haben drei Tage in einer Jugendherberge geschlafen. Am besten hat mir die Wanderung zum Wasserfall gefallen. Abends haben wir Stockbrot am Lagerfeuer gemacht. Es war wirklich ein tolles Erlebnis!</p>
+        <p style="margin-bottom:20px;">Wart ihr mit eurer Klasse auch schon auf Klassenfahrt? Erz&auml;hl mir davon!</p>
+        <p>Dein Freund,<br><b>Jonas</b></p>
+      </div>
+    </div>
+
+    <!-- ПИСЬМО 6: Neues Hobby -->
+    <div class="letter-example" id="letter5">
+      <div class="letter-paper">
+        <p style="text-align:right; color:#555; margin-bottom:20px;">M&ouml;nchengladbach, den 17. M&auml;rz 2026</p>
+        <p style="margin-bottom:16px;">Liebe Sara,</p>
+        <p style="margin-bottom:14px;">vielen Dank f&uuml;r deinen letzten Brief! Ich habe mich sehr dar&uuml;ber gefreut.</p>
+        <p style="margin-bottom:14px;">Ich wollte dir erz&auml;hlen, dass ich jetzt Gitarre lerne. Jeden Mittwoch habe ich Unterricht in der Musikschule. Am Anfang war es schwer, aber jetzt kann ich schon zwei Lieder spielen. Mein Lehrer sagt, ich mache gute Fortschritte. Ich &uuml;be jeden Tag zwanzig Minuten.</p>
+        <p style="margin-bottom:20px;">Spielst du auch ein Instrument? Vielleicht k&ouml;nnen wir mal zusammen Musik machen!</p>
+        <p>Alles Liebe,<br><b>deine Hannah</b></p>
+      </div>
+    </div>
+
+    <!-- ПИСЬМО 7: Umzug -->
+    <div class="letter-example" id="letter6">
+      <div class="letter-paper">
+        <p style="text-align:right; color:#555; margin-bottom:20px;">M&ouml;nchengladbach, den 20. M&auml;rz 2026</p>
+        <p style="margin-bottom:16px;">Lieber Felix,</p>
+        <p style="margin-bottom:14px;">wie geht es dir? Ich vermisse dich und unsere alte Schule sehr!</p>
+        <p style="margin-bottom:14px;">Seit zwei Wochen wohne ich jetzt in M&ouml;nchengladbach. Unsere neue Wohnung ist sch&ouml;n und ich habe ein gro&szlig;es Zimmer. In meiner neuen Klasse sind alle nett zu mir. Ich habe auch schon ein M&auml;dchen kennengelernt, das in unserer Stra&szlig;e wohnt. Trotzdem denke ich oft an dich.</p>
+        <p style="margin-bottom:20px;">D&uuml;rfen deine Eltern dich vielleicht mal in den Ferien herbringen? Das w&auml;re toll!</p>
+        <p>Liebe Gr&uuml;&szlig;e,<br><b>dein Leon</b></p>
+      </div>
+    </div>
+
+    <!-- ПИСЬМО 8: Fußballturnier -->
+    <div class="letter-example" id="letter7">
+      <div class="letter-paper">
+        <p style="text-align:right; color:#555; margin-bottom:20px;">M&ouml;nchengladbach, den 22. M&auml;rz 2026</p>
+        <p style="margin-bottom:16px;">Liebe Lena,</p>
+        <p style="margin-bottom:14px;">rate mal, was passiert ist! Ich bin so aufgeregt!</p>
+        <p style="margin-bottom:14px;">Am Samstag hatte unsere Schulmannschaft ein gro&szlig;es Fu&szlig;ballturnier. Wir haben drei Spiele gespielt und zwei davon gewonnen. Im letzten Spiel habe ich sogar ein Tor geschossen! Unser Trainer war sehr stolz auf uns. Am Ende haben wir den zweiten Platz gemacht und einen Pokal bekommen.</p>
+        <p style="margin-bottom:20px;">Hast du am Wochenende auch etwas Sch&ouml;nes gemacht? Schreib mir bald zur&uuml;ck!</p>
+        <p>Sportliche Gr&uuml;&szlig;e,<br><b>deine Klara</b></p>
+      </div>
+    </div>
+
+    <div class="letter-dots" id="ldots"></div>
+
     <div class="card" style="margin-top:14px;">
       <div class="card-title">&#128172; Полезные фразы для письма</div>
       <div class="phrase-box"><span class="phrase-de">Ich habe mich sehr gefreut!</span><span class="phrase-ru">Я очень обрадовался/ась!</span></div>
@@ -588,6 +734,58 @@ function updateProgress() {
   document.getElementById('pbar').style.width = pct + '%';
   document.getElementById('plabel').textContent = done + ' / ' + items.length + ' выполнено';
 }
+
+/* LETTER NAVIGATION */
+var letterTopics = [
+  'Im Zoo',
+  'Geburtstagsparty',
+  'Urlaub am Meer',
+  'Neues Haustier',
+  'Klassenfahrt',
+  'Neues Hobby',
+  'Umzug',
+  'Fu\u00dfballturnier'
+];
+var currentLetter = 0;
+var totalLetters = letterTopics.length;
+
+function initDots() {
+  var dots = document.getElementById('ldots');
+  for (var i = 0; i < totalLetters; i++) {
+    var d = document.createElement('div');
+    d.className = 'letter-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('onclick', 'goToLetter(' + i + ')');
+    dots.appendChild(d);
+  }
+  document.getElementById('ltotal').textContent = totalLetters;
+}
+
+function goToLetter(n) {
+  currentLetter = n;
+  renderLetter();
+}
+
+function showLetter(dir) {
+  currentLetter += dir;
+  if (currentLetter < 0) currentLetter = 0;
+  if (currentLetter >= totalLetters) currentLetter = totalLetters - 1;
+  renderLetter();
+}
+
+function renderLetter() {
+  document.querySelectorAll('.letter-example').forEach(function(el, i) {
+    el.classList.toggle('active', i === currentLetter);
+  });
+  document.querySelectorAll('.letter-dot').forEach(function(d, i) {
+    d.classList.toggle('active', i === currentLetter);
+  });
+  document.getElementById('ltopic').textContent = letterTopics[currentLetter];
+  document.getElementById('lnum').textContent = currentLetter + 1;
+  document.getElementById('lprev').disabled = currentLetter === 0;
+  document.getElementById('lnext').disabled = currentLetter === totalLetters - 1;
+}
+
+initDots();
 </script>
 </body>
 </html>
