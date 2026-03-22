@@ -364,6 +364,201 @@
     transition: all 0.2s;
   }
   .letter-dot.active { background: var(--orange); transform: scale(1.3); }
+  /* SORT EXERCISE */
+  .sort-zone {
+    border: 2px dashed #CCC;
+    border-radius: 12px;
+    padding: 10px;
+    min-height: 50px;
+    margin-bottom: 8px;
+    transition: all 0.2s;
+    background: #FAFAFA;
+  }
+  .sort-zone-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .sort-zone.correct { border-color: var(--green); background: #E8F5E9; }
+  .sort-zone.wrong { border-color: var(--red); background: #FFEBEE; }
+  .sort-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-height: 32px;
+  }
+  .sort-chip {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: white;
+    border: 2px solid #DDD;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .sort-chip:hover { border-color: var(--blue); background: #E3F2FD; }
+  .sort-chip.selected { border-color: var(--blue); background: #BBDEFB; color: #1565C0; }
+  .sort-chip.placed { opacity: 0.4; pointer-events: none; }
+  .sort-chip.in-zone { border-color: var(--purple); background: #F3E5F5; }
+  /* GAP-FILL EXERCISE */
+  .gap-letter {
+    background: #FFF9E6;
+    border: 2px dashed #E8A800;
+    border-radius: 12px;
+    padding: 18px 20px;
+    font-size: 0.88rem;
+    line-height: 2;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .gap-slot {
+    display: inline-block;
+    min-width: 100px;
+    border-bottom: 2px dashed #999;
+    padding: 2px 6px;
+    margin: 0 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    font-weight: 700;
+    color: transparent;
+    border-radius: 4px;
+  }
+  .gap-slot.filled { color: var(--blue); border-bottom-color: var(--blue); background: #E3F2FD; }
+  .gap-slot.correct-slot { color: var(--green); border-bottom-color: var(--green); background: #E8F5E9; }
+  .gap-slot.wrong-slot { color: var(--red); border-bottom-color: var(--red); background: #FFEBEE; }
+  .gap-words {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    justify-content: center;
+    margin-top: 14px;
+  }
+  .gap-word {
+    padding: 7px 14px;
+    border-radius: 8px;
+    background: white;
+    border: 2px solid #DDD;
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .gap-word:hover { border-color: var(--blue); background: #E3F2FD; }
+  .gap-word.used { opacity: 0.35; pointer-events: none; }
+  .gap-word.gw-correct { border-color: var(--green); background: #E8F5E9; }
+  /* ENVELOPE EXERCISE */
+  .envelope {
+    background: #FFF9E6;
+    border: 3px solid #CC8800;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    min-height: 220px;
+  }
+  .env-zone {
+    border: 2px dashed transparent;
+    border-radius: 6px;
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .env-zone:hover { background: rgba(74,144,217,0.1); border-color: var(--blue); }
+  .env-zone.env-correct { background: #E8F5E9; border-color: var(--green); }
+  .env-zone.env-wrong { background: #FFEBEE; border-color: var(--red); }
+  .env-stamp {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 50px;
+    height: 60px;
+    border: 2px dashed transparent;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: rgba(255,107,53,0.1);
+  }
+  .env-stamp:hover { border-color: var(--orange); background: rgba(255,107,53,0.2); }
+  .env-stamp.env-correct { background: #E8F5E9; border-color: var(--green); }
+  .env-stamp.env-wrong { background: #FFEBEE; border-color: var(--red); }
+  .env-task {
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    padding: 8px 14px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .exercise-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 24px 0 10px;
+    padding-top: 16px;
+    border-top: 2px solid #EEE;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .exercise-title:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+  .btn-check-exercise {
+    display: block;
+    margin: 12px auto 0;
+    padding: 9px 24px;
+    border-radius: 20px;
+    border: none;
+    background: var(--blue);
+    color: white;
+    font-family: 'Baloo 2', cursive;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-check-exercise:hover { background: #3A7BC8; transform: scale(1.03); }
+  .btn-check-exercise:disabled { opacity: 0.5; cursor: default; transform: none; }
+  /* SPOILER TEXT */
+  .spoiler {
+    display: inline;
+    color: #999;
+    font-size: 0.82rem;
+    margin-left: 4px;
+  }
+  .spoiler-word {
+    display: inline-block;
+    background: #D0D0D0;
+    color: transparent;
+    border-radius: 3px;
+    padding: 0 3px;
+    cursor: pointer;
+    transition: all 0.25s;
+    user-select: none;
+    font-size: 0.82rem;
+    vertical-align: baseline;
+    margin: 0 1px;
+  }
+  .spoiler-word.revealed {
+    background: transparent;
+    color: #999;
+    cursor: default;
+  }
   /* THEORY STEPS */
   .step-card {
     background: white;
@@ -773,52 +968,111 @@
   </div>
   <!-- TAB 4: ТЕСТ -->
   <div class="section" id="tab4">
-    <h2 class="section-head">&#129513; Мини-тест</h2>
+    <h2 class="section-head">&#129513; Mini-Test <span class="spoiler" data-ru="Мини-тест"></span></h2>
+
+    <!-- QUIZ -->
     <div class="quiz-q" id="q1">
-      <div class="quiz-question">1. Где пишется дата в письме?</div>
+      <div class="quiz-question">1. Wo schreibt man das Datum im Brief? <span class="spoiler" data-ru="Где пишется дата в письме?"></span></div>
       <div class="quiz-options">
-        <div class="quiz-opt" onclick="answer(this,'q1',false,'Нет! Дата — вверху справа.')">Слева внизу</div>
-        <div class="quiz-opt" onclick="answer(this,'q1',true,'Правильно! Дата пишется справа вверху.')">Справа вверху</div>
-        <div class="quiz-opt" onclick="answer(this,'q1',false,'Нет! Посередине пишется только заголовок (если есть).')">По центру</div>
+        <div class="quiz-opt" onclick="answer(this,'q1',false,'Nein! Das Datum steht oben rechts.')">Links unten <span class="spoiler" data-ru="Слева внизу"></span></div>
+        <div class="quiz-opt" onclick="answer(this,'q1',true,'Richtig! Das Datum steht oben rechts.')">Oben rechts <span class="spoiler" data-ru="Справа вверху"></span></div>
+        <div class="quiz-opt" onclick="answer(this,'q1',false,'Nein! In der Mitte steht nur die &Uuml;berschrift.')">In der Mitte <span class="spoiler" data-ru="По центру"></span></div>
       </div>
       <div class="quiz-feedback" id="q1-fb"></div>
     </div>
     <div class="quiz-q" id="q2">
-      <div class="quiz-question">2. Как правильно написать Anrede?</div>
+      <div class="quiz-question">2. Wie schreibt man die Anrede richtig? <span class="spoiler" data-ru="Как правильно написать обращение?"></span></div>
       <div class="quiz-options">
-        <div class="quiz-opt" onclick="answer(this,'q2',false,'Нет! После запятой — маленькая буква: «ich freue mich...»')">Liebe Anna, Ich freue mich...</div>
-        <div class="quiz-opt" onclick="answer(this,'q2',true,'Отлично! После запятой в Anrede — всегда маленькая буква.')">Liebe Anna, ich freue mich...</div>
-        <div class="quiz-opt" onclick="answer(this,'q2',false,'Нет! «Hallo» используют в разговоре, не в письме.')">Hallo Anna! Ich freue mich...</div>
+        <div class="quiz-opt" onclick="answer(this,'q2',false,'Nein! Nach dem Komma \u2014 Kleinbuchstabe: ich freue mich...')">Liebe Anna, Ich freue mich...</div>
+        <div class="quiz-opt" onclick="answer(this,'q2',true,'Super! Nach dem Komma in der Anrede \u2014 immer klein.')">Liebe Anna, ich freue mich...</div>
+        <div class="quiz-opt" onclick="answer(this,'q2',false,'Nein! \u00abHallo\u00bb benutzt man im Gespr\u00e4ch, nicht im Brief.')">Hallo Anna! Ich freue mich...</div>
       </div>
       <div class="quiz-feedback" id="q2-fb"></div>
     </div>
     <div class="quiz-q" id="q3">
-      <div class="quiz-question">3. Как правильно попрощаться в письме?</div>
+      <div class="quiz-question">3. Wie verabschiedet man sich im Brief richtig? <span class="spoiler" data-ru="Как правильно попрощаться в письме?"></span></div>
       <div class="quiz-options">
-        <div class="quiz-opt" onclick="answer(this,'q3',false,'Нет, «Tschüss» — для устного общения.')">Tsch&uuml;ss, Max</div>
-        <div class="quiz-opt" onclick="answer(this,'q3',false,'Почти! Но лучше: Viele liebe Grüße, dein Max')">Bis bald, Max</div>
-        <div class="quiz-opt" onclick="answer(this,'q3',true,'Правильно! Это классическое прощание в дружеском письме.')">Viele liebe Gr&uuml;&szlig;e, dein Max</div>
+        <div class="quiz-opt" onclick="answer(this,'q3',false,'Nein, \u00abTsch\u00fcss\u00bb ist f\u00fcr m\u00fcndliche Kommunikation.')">Tsch&uuml;ss, Max</div>
+        <div class="quiz-opt" onclick="answer(this,'q3',false,'Fast! Aber besser: Viele liebe Gr\u00fc\u00dfe, dein Max')">Bis bald, Max</div>
+        <div class="quiz-opt" onclick="answer(this,'q3',true,'Richtig! Das ist der klassische Abschied im Freundschaftsbrief.')">Viele liebe Gr&uuml;&szlig;e, dein Max</div>
       </div>
       <div class="quiz-feedback" id="q3-fb"></div>
     </div>
     <div class="quiz-q" id="q4">
-      <div class="quiz-question">4. Что ОБЯЗАТЕЛЬНО должно быть в конце дружеского письма?</div>
+      <div class="quiz-question">4. Was MUSS am Ende eines Freundschaftsbriefes stehen? <span class="spoiler" data-ru="Что ОБЯЗАТЕЛЬНО должно быть в конце письма?"></span></div>
       <div class="quiz-options">
-        <div class="quiz-opt" onclick="answer(this,'q4',false,'Рисунок — хорошо, но не обязателен.')">Рисунок</div>
-        <div class="quiz-opt" onclick="answer(this,'q4',true,'Верно! Вопрос к другу — важная часть дружеского письма.')">Вопрос другу</div>
-        <div class="quiz-opt" onclick="answer(this,'q4',false,'Номер телефона в письме не нужен.')">Номер телефона</div>
+        <div class="quiz-opt" onclick="answer(this,'q4',false,'Eine Zeichnung ist sch\u00f6n, aber nicht Pflicht.')">Eine Zeichnung <span class="spoiler" data-ru="Рисунок"></span></div>
+        <div class="quiz-opt" onclick="answer(this,'q4',true,'Richtig! Eine Frage an den Freund ist ein wichtiger Teil.')">Eine Frage an den Freund <span class="spoiler" data-ru="Вопрос другу"></span></div>
+        <div class="quiz-opt" onclick="answer(this,'q4',false,'Eine Telefonnummer braucht man im Brief nicht.')">Eine Telefonnummer <span class="spoiler" data-ru="Номер телефона"></span></div>
       </div>
       <div class="quiz-feedback" id="q4-fb"></div>
     </div>
     <div class="quiz-q" id="q5">
-      <div class="quiz-question">5. Как правильно написать дату?</div>
+      <div class="quiz-question">5. Wie schreibt man das Datum richtig? <span class="spoiler" data-ru="Как правильно написать дату?"></span></div>
       <div class="quiz-options">
-        <div class="quiz-opt" onclick="answer(this,'q5',false,'Нет, нужно писать словами и добавить «den».')">22.3.2026</div>
-        <div class="quiz-opt" onclick="answer(this,'q5',false,'Нет! Перед числом пишется «den», и нужен город.')">22. M&auml;rz 2026</div>
-        <div class="quiz-opt" onclick="answer(this,'q5',true,'Отлично! Город + «den» + число + месяц + год.')">M&ouml;nchengladbach, den 22. M&auml;rz 2026</div>
+        <div class="quiz-opt" onclick="answer(this,'q5',false,'Nein, man schreibt mit Worten und \u00abden\u00bb.')">22.3.2026</div>
+        <div class="quiz-opt" onclick="answer(this,'q5',false,'Nein! Vor der Zahl steht \u00abden\u00bb, und der Ort fehlt.')">22. M&auml;rz 2026</div>
+        <div class="quiz-opt" onclick="answer(this,'q5',true,'Super! Ort + \u00abden\u00bb + Zahl + Monat + Jahr.')">M&ouml;nchengladbach, den 22. M&auml;rz 2026</div>
       </div>
       <div class="quiz-feedback" id="q5-fb"></div>
     </div>
+
+    <!-- SORTIERE DIE BRIEFTEILE -->
+    <div class="exercise-title">&#128256; Sortiere die Briefteile <span class="spoiler" data-ru="Рассортируй части письма"></span></div>
+    <p style="font-size:0.82rem;color:#888;margin-bottom:10px;">Klicke auf ein Element, dann auf die richtige Kategorie <span class="spoiler" data-ru="Нажми на элемент, затем на нужную категорию"></span></p>
+    <div id="sort-chips" class="sort-chips" style="margin-bottom:14px;"></div>
+    <div class="sort-zone" id="zone-ort" onclick="placeChip('ort')">
+      <div class="sort-zone-label">&#128205; Ort und Datum</div>
+      <div class="sort-chips" id="zone-ort-chips"></div>
+    </div>
+    <div class="sort-zone" id="zone-anrede" onclick="placeChip('anrede')">
+      <div class="sort-zone-label">&#128140; Anrede</div>
+      <div class="sort-chips" id="zone-anrede-chips"></div>
+    </div>
+    <div class="sort-zone" id="zone-gruss" onclick="placeChip('gruss')">
+      <div class="sort-zone-label">&#128075; Gru&szlig; und Name</div>
+      <div class="sort-chips" id="zone-gruss-chips"></div>
+    </div>
+    <button class="btn-check-exercise" onclick="checkSort()" id="btn-sort">&#10003; Pr&uuml;fen</button>
+    <div class="quiz-feedback" id="sort-fb" style="margin-top:8px;"></div>
+
+    <!-- L&Uuml;CKENTEXT -->
+    <div class="exercise-title">&#9997;&#65039; L&uuml;ckentext <span class="spoiler" data-ru="Заполни пропуски в письме"></span></div>
+    <p style="font-size:0.82rem;color:#888;margin-bottom:10px;">W&auml;hle das richtige Wort und klicke auf die L&uuml;cke <span class="spoiler" data-ru="Нажми на слово, затем на пропуск"></span></p>
+    <div class="gap-letter" id="gap-letter">
+      <div style="text-align:right; color:#888;">
+        <span class="gap-slot" data-answer="M&uuml;nchen" onclick="fillGap(this)">_____</span>, <span class="gap-slot" data-answer="22.1.2017" onclick="fillGap(this)">_____</span>
+      </div>
+      <br>
+      <span class="gap-slot" data-answer="Liebe Paula" onclick="fillGap(this)">_____</span>,
+      <br><br>
+      letzten Sonntag habe ich auf der Stra&szlig;e ein M&auml;dchen gesehen. Sie sah genauso aus wie du. Da musste ich an dich denken. Wie w&auml;re es, wenn ich dich im Sommer besuchen komme? Wir k&ouml;nnten Eis essen und zusammen schwimmen gehen. Schreib mir doch zur&uuml;ck, wie du diese Idee findest.
+      <br><br>
+      <span class="gap-slot" data-answer="Viele liebe Gr&uuml;&szlig;e" onclick="fillGap(this)">_____</span>
+      <br>
+      <span class="gap-slot" data-answer="Deine Laura" onclick="fillGap(this)">_____</span>
+    </div>
+    <div class="gap-words" id="gap-words"></div>
+    <button class="btn-check-exercise" onclick="checkGaps()" id="btn-gaps">&#10003; Pr&uuml;fen</button>
+    <div class="quiz-feedback" id="gap-fb" style="margin-top:8px;"></div>
+
+    <!-- BRIEFUMSCHLAG -->
+    <div class="exercise-title">&#9993;&#65039; Briefumschlag <span class="spoiler" data-ru="Найди части конверта"></span></div>
+    <div class="env-task" id="env-task">&#128073; Klicke auf: <b>Briefmarke</b> <span class="spoiler" data-ru="марка"></span></div>
+    <div class="envelope" id="envelope">
+      <div class="env-stamp" onclick="envClick('stamp')" id="env-stamp">&#128235;</div>
+      <div class="env-zone" onclick="envClick('absender')" id="env-absender" style="margin-bottom:20px;">
+        Anton Weber<br>
+        Industriestr. 99<br>
+        09143 Chemnitz
+      </div>
+      <div class="env-zone" onclick="envClick('empfaenger')" id="env-empfaenger" style="text-align:center; margin-top:20px;">
+        Frieda Severin<br>
+        Kemptener Str. 33<br>
+        87629 F&uuml;ssen
+      </div>
+    </div>
+    <div class="quiz-feedback" id="env-fb" style="margin-top:8px;"></div>
   </div>
   <!-- TAB 5: ЧЕКЛИСТ -->
   <div class="section" id="tab5">
@@ -944,6 +1198,250 @@ function renderLetter() {
 }
 
 initDots();
+
+/* ===== SPOILER TEXT ===== */
+function initSpoilers(root) {
+  var els = (root || document).querySelectorAll('.spoiler[data-ru]');
+  els.forEach(function(sp) {
+    if (sp.dataset.init) return;
+    sp.dataset.init = '1';
+    var text = sp.dataset.ru;
+    var words = text.split(' ');
+    sp.innerHTML = '';
+    words.forEach(function(w, i) {
+      var s = document.createElement('span');
+      s.className = 'spoiler-word';
+      s.textContent = w;
+      s.onclick = function(e) {
+        e.stopPropagation();
+        this.classList.add('revealed');
+      };
+      sp.appendChild(s);
+      if (i < words.length - 1) sp.appendChild(document.createTextNode(' '));
+    });
+  });
+}
+initSpoilers();
+
+/* ===== SORT EXERCISE ===== */
+var sortItems = [
+  { text: 'Viele Gr\u00fc\u00dfe', zone: 'gruss' },
+  { text: 'Olpe, 2. April 2012', zone: 'ort' },
+  { text: 'New York, 15.8.1973', zone: 'ort' },
+  { text: 'Dein Sven', zone: 'gruss' },
+  { text: 'Liebe Gr\u00fc\u00dfe', zone: 'gruss' },
+  { text: 'Lieber Tino', zone: 'anrede' },
+  { text: 'Liebe Svenja', zone: 'anrede' },
+  { text: 'Hallo Tante Rosi', zone: 'anrede' },
+  { text: 'Frankfurt, 1.1.2016', zone: 'ort' }
+];
+var selectedChip = null;
+
+function shuffleArr(a) {
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+function initSort() {
+  var container = document.getElementById('sort-chips');
+  shuffleArr(sortItems);
+  sortItems.forEach(function(item, i) {
+    var chip = document.createElement('div');
+    chip.className = 'sort-chip';
+    chip.textContent = item.text;
+    chip.dataset.idx = i;
+    chip.onclick = function() { selectChip(this); };
+    container.appendChild(chip);
+  });
+}
+
+function selectChip(el) {
+  if (el.classList.contains('placed')) return;
+  document.querySelectorAll('.sort-chip.selected').forEach(function(c) { c.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedChip = el;
+}
+
+function placeChip(zone) {
+  if (!selectedChip) return;
+  var zoneChips = document.getElementById('zone-' + zone + '-chips');
+  var clone = document.createElement('div');
+  clone.className = 'sort-chip in-zone';
+  clone.textContent = selectedChip.textContent;
+  clone.dataset.idx = selectedChip.dataset.idx;
+  clone.dataset.placedZone = zone;
+  clone.onclick = function() { returnChip(this); };
+  zoneChips.appendChild(clone);
+  selectedChip.classList.add('placed');
+  selectedChip.classList.remove('selected');
+  selectedChip = null;
+}
+
+function returnChip(el) {
+  var idx = el.dataset.idx;
+  var orig = document.querySelector('#sort-chips .sort-chip[data-idx="' + idx + '"]');
+  if (orig) orig.classList.remove('placed');
+  el.remove();
+}
+
+function checkSort() {
+  var allPlaced = document.querySelectorAll('.sort-chip.in-zone');
+  var origChips = document.querySelectorAll('#sort-chips .sort-chip');
+  var allDone = true;
+  origChips.forEach(function(c) { if (!c.classList.contains('placed')) allDone = false; });
+  if (!allDone) {
+    var fb = document.getElementById('sort-fb');
+    fb.textContent = '\u274C Ordne alle Elemente zu!';
+    fb.className = 'quiz-feedback show fail';
+    return;
+  }
+  var correct = 0;
+  allPlaced.forEach(function(chip) {
+    var idx = parseInt(chip.dataset.idx);
+    var placed = chip.dataset.placedZone;
+    if (sortItems[idx].zone === placed) {
+      correct++;
+      chip.style.borderColor = '#4CAF50';
+      chip.style.background = '#E8F5E9';
+    } else {
+      chip.style.borderColor = '#E74C3C';
+      chip.style.background = '#FFEBEE';
+    }
+  });
+  var fb = document.getElementById('sort-fb');
+  if (correct === sortItems.length) {
+    fb.textContent = '\u2705 Super! Alles richtig!';
+    fb.className = 'quiz-feedback show ok';
+  } else {
+    fb.textContent = '\u274C ' + correct + ' / ' + sortItems.length + ' richtig. Versuch es noch mal!';
+    fb.className = 'quiz-feedback show fail';
+  }
+}
+
+initSort();
+
+/* ===== GAP-FILL EXERCISE ===== */
+var gapWords = ['Liebe Paula', 'M\u00fcnchen', '22.1.2017', 'Deine Laura', 'Viele liebe Gr\u00fc\u00dfe'];
+var selectedGapWord = null;
+
+function initGaps() {
+  var container = document.getElementById('gap-words');
+  shuffleArr(gapWords);
+  gapWords.forEach(function(w) {
+    var el = document.createElement('div');
+    el.className = 'gap-word';
+    el.textContent = w;
+    el.dataset.word = w;
+    el.onclick = function() { selectGapWord(this); };
+    container.appendChild(el);
+  });
+}
+
+function selectGapWord(el) {
+  if (el.classList.contains('used')) return;
+  document.querySelectorAll('.gap-word').forEach(function(w) { w.style.borderColor = '#DDD'; });
+  el.style.borderColor = '#4A90D9';
+  selectedGapWord = el;
+}
+
+function fillGap(slot) {
+  if (!selectedGapWord) return;
+  if (slot.classList.contains('filled')) {
+    var prevWord = slot.dataset.filledWord;
+    document.querySelectorAll('.gap-word').forEach(function(w) {
+      if (w.dataset.word === prevWord) { w.classList.remove('used'); }
+    });
+  }
+  slot.textContent = selectedGapWord.textContent;
+  slot.dataset.filledWord = selectedGapWord.dataset.word;
+  slot.classList.add('filled');
+  slot.classList.remove('correct-slot', 'wrong-slot');
+  selectedGapWord.classList.add('used');
+  selectedGapWord.style.borderColor = '#DDD';
+  selectedGapWord = null;
+}
+
+function decodeHtml(html) {
+  var txt = document.createElement('textarea');
+  txt.innerHTML = html;
+  return txt.value;
+}
+
+function checkGaps() {
+  var slots = document.querySelectorAll('.gap-slot');
+  var correct = 0;
+  var total = slots.length;
+  slots.forEach(function(s) {
+    if (!s.classList.contains('filled')) {
+      s.classList.add('wrong-slot');
+      return;
+    }
+    var expected = decodeHtml(s.dataset.answer);
+    if (s.dataset.filledWord === expected) {
+      s.classList.add('correct-slot');
+      s.classList.remove('wrong-slot');
+      correct++;
+    } else {
+      s.classList.add('wrong-slot');
+      s.classList.remove('correct-slot');
+    }
+  });
+  var fb = document.getElementById('gap-fb');
+  if (correct === total) {
+    fb.textContent = '\u2705 Toll! Alle L\u00fccken sind richtig!';
+    fb.className = 'quiz-feedback show ok';
+  } else {
+    fb.textContent = '\u274C ' + correct + ' / ' + total + ' richtig. Versuch es noch mal!';
+    fb.className = 'quiz-feedback show fail';
+  }
+}
+
+initGaps();
+
+/* ===== ENVELOPE EXERCISE ===== */
+var envTasks = [
+  { id: 'stamp', label: 'Briefmarke', ru: '\u043C\u0430\u0440\u043A\u0430' },
+  { id: 'absender', label: 'Absender', ru: '\u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u0435\u043B\u044C' },
+  { id: 'empfaenger', label: 'Empf\u00e4nger', ru: '\u043F\u043E\u043B\u0443\u0447\u0430\u0442\u0435\u043B\u044C' }
+];
+var envStep = 0;
+
+function envClick(part) {
+  if (envStep >= envTasks.length) return;
+  var task = envTasks[envStep];
+  var elId = part === 'stamp' ? 'env-stamp' : 'env-' + part;
+  var el = document.getElementById(elId);
+  var fb = document.getElementById('env-fb');
+
+  if (part === task.id) {
+    el.classList.add('env-correct');
+    fb.textContent = '\u2705 Richtig! ' + task.label + ' = ' + task.ru;
+    fb.className = 'quiz-feedback show ok';
+    envStep++;
+    if (envStep < envTasks.length) {
+      setTimeout(function() {
+        var next = envTasks[envStep];
+        document.getElementById('env-task').innerHTML = '\uD83D\uDC49 Klicke auf: <b>' + next.label + '</b> <span class="spoiler" data-ru="' + next.ru + '"></span>';
+        initSpoilers(document.getElementById('env-task'));
+        fb.className = 'quiz-feedback';
+      }, 1200);
+    } else {
+      setTimeout(function() {
+        document.getElementById('env-task').innerHTML = '\u2705 Super! Alle Teile des Umschlags gefunden!';
+        document.getElementById('env-task').style.background = '#E8F5E9';
+        document.getElementById('env-task').style.color = '#2E7D32';
+      }, 1200);
+    }
+  } else {
+    el.classList.add('env-wrong');
+    fb.textContent = '\u274C Nein, das ist nicht ' + task.label + '. Versuch es noch mal!';
+    fb.className = 'quiz-feedback show fail';
+    setTimeout(function() { el.classList.remove('env-wrong'); }, 800);
+  }
+}
 </script>
 </body>
 </html>
