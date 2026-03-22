@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brief schreiben – MaximSchool</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FFD93D;
+    --orange: #FF6B35;
+    --green: #4CAF50;
+    --blue: #4A90D9;
+    --purple: #9C6FDE;
+    --red: #E74C3C;
+    --bg: #FFF8F0;
+    --card: #FFFFFF;
+    --text: #2D2D2D;
+    --light: #F5EFE6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  /* BACK BUTTON */
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    margin: 14px 16px 0;
+    border-radius: 20px;
+    background: white;
+    color: #666;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.2s;
+  }
+  .back-btn:hover { background: #F0F0F0; color: #333; }
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #FF6B35 0%, #FFD93D 100%);
+    padding: 28px 20px 22px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '\2709\FE0F';
+    position: absolute;
+    font-size: 120px;
+    opacity: 0.1;
+    top: -10px;
+    right: -10px;
+  }
+  header h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 2rem;
+    font-weight: 800;
+    color: white;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+    letter-spacing: -0.5px;
+  }
+  header p {
+    color: rgba(255,255,255,0.92);
+    font-size: 0.95rem;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    padding: 16px 16px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex-shrink: 0;
+    padding: 9px 16px;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    font-family: 'Baloo 2', cursive;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: white;
+    color: #888;
+    transition: all 0.2s;
+  }
+  .tab.active { color: white; border-color: transparent; }
+  .tab:nth-child(1).active { background: var(--blue); }
+  .tab:nth-child(2).active { background: var(--green); }
+  .tab:nth-child(3).active { background: var(--purple); }
+  .tab:nth-child(4).active { background: var(--red); }
+  .tab:nth-child(5).active { background: var(--orange); }
+  /* CONTENT */
+  .content { padding: 16px; max-width: 680px; margin: 0 auto; }
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    border-left: 5px solid var(--blue);
+  }
+  .card.green { border-left-color: var(--green); }
+  .card.purple { border-left-color: var(--purple); }
+  .card.orange { border-left-color: var(--orange); }
+  .card.red { border-left-color: var(--red); }
+  .card.yellow { border-left-color: var(--yellow); }
+  .card-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  /* STRUCTURE VISUAL */
+  .letter-block {
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .letter-block:hover { transform: translateX(4px); }
+  .letter-block .num {
+    position: absolute;
+    left: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  .block-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+  .block-detail { font-size: 0.82rem; opacity: 0.85; }
+  .block-example {
+    margin-top: 6px;
+    font-size: 0.82rem;
+    font-style: italic;
+    background: rgba(255,255,255,0.5);
+    border-radius: 6px;
+    padding: 5px 8px;
+    display: none;
+  }
+  .letter-block.open .block-example { display: block; }
+  .b1 { background: #E3F2FD; color: #1565C0; }
+  .b2 { background: #E8F5E9; color: #2E7D32; }
+  .b3 { background: #F3E5F5; color: #6A1B9A; }
+  .b4 { background: #FFF3E0; color: #E65100; }
+  .b5 { background: #FCE4EC; color: #880E4F; }
+  /* EXAMPLE LETTER */
+  .letter-paper {
+    background: white;
+    border-radius: 12px;
+    padding: 22px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    border: 1px solid #EEE;
+    position: relative;
+    overflow: hidden;
+  }
+  .letter-paper::before {
+    content: '';
+    position: absolute;
+    left: 42px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: #FFD93D;
+  }
+  .letter-label {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .lbl-1 { background: #E3F2FD; color: #1565C0; }
+  .lbl-2 { background: #E8F5E9; color: #2E7D32; }
+  .lbl-3 { background: #F3E5F5; color: #6A1B9A; }
+  .lbl-4 { background: #FFF3E0; color: #E65100; }
+  .lbl-5 { background: #FCE4EC; color: #880E4F; }
+  /* ERRORS */
+  .error-item {
+    display: flex;
+    gap: 10px;
+    padding: 11px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    background: #FFF5F5;
+    border: 1px solid #FFCDD2;
+    align-items: flex-start;
+  }
+  .error-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+  .error-wrong { font-weight: 700; color: var(--red); font-size: 0.85rem; }
+  .error-right { font-weight: 700; color: var(--green); font-size: 0.85rem; }
+  .error-tip { font-size: 0.8rem; color: #555; margin-top: 2px; }
+  /* QUIZ */
+  .quiz-q {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  }
+  .quiz-question { font-weight: 700; margin-bottom: 10px; font-size: 0.9rem; }
+  .quiz-options { display: flex; flex-direction: column; gap: 7px; }
+  .quiz-opt {
+    padding: 9px 14px;
+    border-radius: 8px;
+    border: 2px solid #EEE;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.15s;
+    background: #FAFAFA;
+  }
+  .quiz-opt:hover { border-color: var(--blue); background: #E3F2FD; }
+  .quiz-opt.correct { background: #E8F5E9; border-color: var(--green); color: #2E7D32; font-weight: 700; }
+  .quiz-opt.wrong { background: #FFEBEE; border-color: var(--red); color: var(--red); }
+  .quiz-feedback { font-size: 0.82rem; margin-top: 7px; padding: 7px 10px; border-radius: 7px; display: none; }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.ok { background: #E8F5E9; color: #2E7D32; }
+  .quiz-feedback.fail { background: #FFEBEE; color: var(--red); }
+  /* CHECKLIST */
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    background: white;
+    border: 2px solid #EEE;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .checklist-item.checked { background: #E8F5E9; border-color: var(--green); }
+  .check-box {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    border: 2px solid #CCC;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    margin-top: 1px;
+  }
+  .checklist-item.checked .check-box { background: var(--green); border-color: var(--green); color: white; }
+  .check-text { font-size: 0.85rem; font-weight: 600; }
+  .check-sub { font-size: 0.78rem; color: #777; margin-top: 2px; font-weight: 400; }
+  .progress-bar-wrap { background: #EEE; border-radius: 20px; height: 8px; margin: 12px 0 6px; }
+  .progress-bar { height: 8px; border-radius: 20px; background: linear-gradient(90deg, var(--green), #8BC34A); transition: width 0.4s; }
+  .progress-label { font-size: 0.8rem; color: #666; text-align: right; }
+  /* PHRASES */
+  .phrase-box {
+    background: white;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    border: 1px solid #EEE;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .phrase-de { font-weight: 700; color: #333; }
+  .phrase-ru { color: #777; font-size: 0.8rem; }
+  h2.section-head {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tip-box {
+    background: #FFFDE7;
+    border: 1px solid #FFD93D;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.83rem;
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+  }
+</style>
+</head>
+<body>
+<a class="back-btn" href="../index.html">&larr; Все темы</a>
+<header>
+  <h1>&#9993;&#65039; Brief schreiben</h1>
+  <p>Шпаргалка &bull; 4 Klasse &bull; Freundschaftsbrief</p>
+</header>
+<div class="tabs">
+  <div class="tab active" onclick="switchTab(0)">&#128208; Структура</div>
+  <div class="tab" onclick="switchTab(1)">&#128196; Пример</div>
+  <div class="tab" onclick="switchTab(2)">&#10060; Ошибки</div>
+  <div class="tab" onclick="switchTab(3)">&#129513; Тест</div>
+  <div class="tab" onclick="switchTab(4)">&#9989; Чеклист</div>
+</div>
+<div class="content">
+  <!-- TAB 1: СТРУКТУРА -->
+  <div class="section active" id="tab0">
+    <h2 class="section-head">&#128208; Структура письма</h2>
+    <p style="font-size:0.82rem;color:#888;margin-bottom:14px;">Нажми на блок, чтобы увидеть пример &#128071;</p>
+    <div style="padding-left: 20px;">
+      <div class="letter-block b1" onclick="toggleBlock(this)">
+        <div class="num">1</div>
+        <div class="block-title">Ort und Datum &mdash; Место и дата</div>
+        <div class="block-detail">Пишется справа вверху</div>
+        <div class="block-example">M&ouml;nchengladbach, den 22. M&auml;rz 2026</div>
+      </div>
+      <div class="letter-block b2" onclick="toggleBlock(this)">
+        <div class="num">2</div>
+        <div class="block-title">Anrede &mdash; Обращение</div>
+        <div class="block-detail">После Anrede &mdash; запятая! Следующая строка с маленькой буквы.</div>
+        <div class="block-example">Liebe Anna, <br>ich hoffe, dass...</div>
+      </div>
+      <div class="letter-block b3" onclick="toggleBlock(this)">
+        <div class="num">3</div>
+        <div class="block-title">Einleitung &mdash; Вступление</div>
+        <div class="block-detail">Почему ты пишешь? Как ты себя чувствуешь?</div>
+        <div class="block-example">Ich habe mich sehr &uuml;ber deinen Brief gefreut! Wie geht es dir?</div>
+      </div>
+      <div class="letter-block b4" onclick="toggleBlock(this)">
+        <div class="num">4</div>
+        <div class="block-title">Hauptteil &mdash; Основная часть</div>
+        <div class="block-detail">Главная тема письма. 2&ndash;4 предложения.</div>
+        <div class="block-example">Am Wochenende war ich im Zoo. Ich habe viele Tiere gesehen. Am liebsten mochte ich die Giraffen!</div>
+      </div>
+      <div class="letter-block b5" onclick="toggleBlock(this)">
+        <div class="num">5</div>
+        <div class="block-title">Schluss &mdash; Заключение</div>
+        <div class="block-detail">Вопрос к другу + прощальная фраза + подпись</div>
+        <div class="block-example">Was hast du am Wochenende gemacht? <br>Viele liebe Gr&uuml;&szlig;e,<br>dein Max</div>
+      </div>
+    </div>
+    <div class="card green" style="margin-top:16px;">
+      <div class="card-title">&#128273; Золотые правила</div>
+      <div style="font-size:0.84rem;line-height:1.7;">
+        После <b>Anrede</b> (Liebe Anna,) &rarr; следующее слово с <b>маленькой</b> буквы<br>
+        Дата: <b>den + число + месяц + год</b><br>
+        В конце письма &rarr; новая строка &rarr; подпись<br>
+        Задай <b>вопрос другу</b> &mdash; это важно! &#10067;
+      </div>
+    </div>
+  </div>
+  <!-- TAB 2: ПРИМЕР ПИСЬМА -->
+  <div class="section" id="tab1">
+    <h2 class="section-head">&#128196; Пример письма</h2>
+    <div class="letter-paper">
+      <p style="text-align:right; color:#555; margin-bottom:20px;">
+        M&ouml;nchengladbach, den 22. M&auml;rz 2026
+        <span class="letter-label lbl-1">&#9312; Datum</span>
+      </p>
+      <p style="margin-bottom:16px;">
+        Liebe Anna,
+        <span class="letter-label lbl-2">&#9313; Anrede</span>
+      </p>
+      <p style="margin-bottom:14px;">
+        ich habe mich sehr &uuml;ber deinen Brief gefreut! Wie geht es dir?
+        <span class="letter-label lbl-3">&#9314; Einleitung</span>
+      </p>
+      <p style="margin-bottom:14px;">
+        Am Wochenende war ich mit meiner Familie im Zoo. Wir haben viele Tiere gesehen. Am liebsten mochte ich die Giraffen, weil sie so gro&szlig; und lustig sind. Meine kleine Schwester hatte ein bisschen Angst vor den L&ouml;wen!
+        <span class="letter-label lbl-4">&#9315; Hauptteil</span>
+      </p>
+      <p style="margin-bottom:20px;">
+        Was hast du am Wochenende gemacht? Schreib mir bald!
+        <span class="letter-label lbl-5">&#9316; Schluss</span>
+      </p>
+      <p>
+        Viele liebe Gr&uuml;&szlig;e,<br>
+        <b>dein Max</b>
+      </p>
+    </div>
+    <div class="card" style="margin-top:14px;">
+      <div class="card-title">&#128172; Полезные фразы для письма</div>
+      <div class="phrase-box"><span class="phrase-de">Ich habe mich sehr gefreut!</span><span class="phrase-ru">Я очень обрадовался/ась!</span></div>
+      <div class="phrase-box"><span class="phrase-de">Wie geht es dir?</span><span class="phrase-ru">Как ты поживаешь?</span></div>
+      <div class="phrase-box"><span class="phrase-de">Am Wochenende war ich...</span><span class="phrase-ru">На выходных я был/а...</span></div>
+      <div class="phrase-box"><span class="phrase-de">Ich finde das super, weil...</span><span class="phrase-ru">Мне это нравится, потому что...</span></div>
+      <div class="phrase-box"><span class="phrase-de">Schreib mir bald!</span><span class="phrase-ru">Пиши мне скорее!</span></div>
+      <div class="phrase-box"><span class="phrase-de">Viele liebe Gr&uuml;&szlig;e</span><span class="phrase-ru">С любовью / С приветом</span></div>
+      <div class="phrase-box"><span class="phrase-de">Dein / Deine + имя</span><span class="phrase-ru">Твой / Твоя + имя</span></div>
+    </div>
+  </div>
+  <!-- TAB 3: ОШИБКИ -->
+  <div class="section" id="tab2">
+    <h2 class="section-head">&#10060; Типичные ошибки</h2>
+    <div class="error-item">
+      <div class="error-icon">&#128205;</div>
+      <div>
+        <div class="error-wrong">&#10007; Liebe Anna, Ich freue mich...</div>
+        <div class="error-right">&#10003; Liebe Anna, ich freue mich...</div>
+        <div class="error-tip">После запятой в Anrede &mdash; маленькая буква!</div>
+      </div>
+    </div>
+    <div class="error-item">
+      <div class="error-icon">&#128197;</div>
+      <div>
+        <div class="error-wrong">&#10007; 22.3.2026 или M&auml;rz 22</div>
+        <div class="error-right">&#10003; M&ouml;nchengladbach, den 22. M&auml;rz 2026</div>
+        <div class="error-tip">Дата пишется словами: число + точка + месяц + год. Перед числом &mdash; &laquo;den&raquo;!</div>
+      </div>
+    </div>
+    <div class="error-item">
+      <div class="error-icon">&#128075;</div>
+      <div>
+        <div class="error-wrong">&#10007; Hallo Anna! / Hey Anna!</div>
+        <div class="error-right">&#10003; Liebe Anna, / Lieber Max,</div>
+        <div class="error-tip">Для письма &mdash; Liebe (девочке) или Lieber (мальчику)!</div>
+      </div>
+    </div>
+    <div class="error-item">
+      <div class="error-icon">&#10067;</div>
+      <div>
+        <div class="error-wrong">&#10007; Письмо без вопроса в конце</div>
+        <div class="error-right">&#10003; Was hast du gemacht? / Wie findest du das?</div>
+        <div class="error-tip">В дружеском письме нужно задать вопрос другу!</div>
+      </div>
+    </div>
+    <div class="error-item">
+      <div class="error-icon">&#9997;&#65039;</div>
+      <div>
+        <div class="error-wrong">&#10007; Tsch&uuml;ss, Max</div>
+        <div class="error-right">&#10003; Viele liebe Gr&uuml;&szlig;e, dein Max</div>
+        <div class="error-tip">Прощание в письме &mdash; не &laquo;Tsch&uuml;ss&raquo;, а &laquo;Viele Gr&uuml;&szlig;e&raquo; / &laquo;Liebe Gr&uuml;&szlig;e&raquo;</div>
+      </div>
+    </div>
+    <div class="error-item">
+      <div class="error-icon">&#128221;</div>
+      <div>
+        <div class="error-wrong">&#10007; Забыть написать, откуда письмо</div>
+        <div class="error-right">&#10003; Ort + Datum всегда вверху справа</div>
+        <div class="error-tip">Город и дата &mdash; обязательная часть письма!</div>
+      </div>
+    </div>
+  </div>
+  <!-- TAB 4: ТЕСТ -->
+  <div class="section" id="tab3">
+    <h2 class="section-head">&#129513; Мини-тест</h2>
+    <div class="quiz-q" id="q1">
+      <div class="quiz-question">1. Где пишется дата в письме?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this,'q1',false,'Нет! Дата — вверху справа.')">Слева внизу</div>
+        <div class="quiz-opt" onclick="answer(this,'q1',true,'Правильно! Дата пишется справа вверху.')">Справа вверху</div>
+        <div class="quiz-opt" onclick="answer(this,'q1',false,'Нет! Посередине пишется только заголовок (если есть).')">По центру</div>
+      </div>
+      <div class="quiz-feedback" id="q1-fb"></div>
+    </div>
+    <div class="quiz-q" id="q2">
+      <div class="quiz-question">2. Как правильно написать Anrede?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this,'q2',false,'Нет! После запятой — маленькая буква: «ich freue mich...»')">Liebe Anna, Ich freue mich...</div>
+        <div class="quiz-opt" onclick="answer(this,'q2',true,'Отлично! После запятой в Anrede — всегда маленькая буква.')">Liebe Anna, ich freue mich...</div>
+        <div class="quiz-opt" onclick="answer(this,'q2',false,'Нет! «Hallo» используют в разговоре, не в письме.')">Hallo Anna! Ich freue mich...</div>
+      </div>
+      <div class="quiz-feedback" id="q2-fb"></div>
+    </div>
+    <div class="quiz-q" id="q3">
+      <div class="quiz-question">3. Как правильно попрощаться в письме?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this,'q3',false,'Нет, «Tschüss» — для устного общения.')">Tsch&uuml;ss, Max</div>
+        <div class="quiz-opt" onclick="answer(this,'q3',false,'Почти! Но лучше: Viele liebe Grüße, dein Max')">Bis bald, Max</div>
+        <div class="quiz-opt" onclick="answer(this,'q3',true,'Правильно! Это классическое прощание в дружеском письме.')">Viele liebe Gr&uuml;&szlig;e, dein Max</div>
+      </div>
+      <div class="quiz-feedback" id="q3-fb"></div>
+    </div>
+    <div class="quiz-q" id="q4">
+      <div class="quiz-question">4. Что ОБЯЗАТЕЛЬНО должно быть в конце дружеского письма?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this,'q4',false,'Рисунок — хорошо, но не обязателен.')">Рисунок</div>
+        <div class="quiz-opt" onclick="answer(this,'q4',true,'Верно! Вопрос к другу — важная часть дружеского письма.')">Вопрос другу</div>
+        <div class="quiz-opt" onclick="answer(this,'q4',false,'Номер телефона в письме не нужен.')">Номер телефона</div>
+      </div>
+      <div class="quiz-feedback" id="q4-fb"></div>
+    </div>
+    <div class="quiz-q" id="q5">
+      <div class="quiz-question">5. Как правильно написать дату?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answer(this,'q5',false,'Нет, нужно писать словами и добавить «den».')">22.3.2026</div>
+        <div class="quiz-opt" onclick="answer(this,'q5',false,'Нет! Перед числом пишется «den», и нужен город.')">22. M&auml;rz 2026</div>
+        <div class="quiz-opt" onclick="answer(this,'q5',true,'Отлично! Город + «den» + число + месяц + год.')">M&ouml;nchengladbach, den 22. M&auml;rz 2026</div>
+      </div>
+      <div class="quiz-feedback" id="q5-fb"></div>
+    </div>
+  </div>
+  <!-- TAB 5: ЧЕКЛИСТ -->
+  <div class="section" id="tab4">
+    <h2 class="section-head">&#9989; Чеклист перед сдачей</h2>
+    <p style="font-size:0.82rem;color:#888;margin-bottom:12px;">Отмечай каждый пункт, когда проверишь</p>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="pbar" style="width:0%"></div></div>
+    <div class="progress-label" id="plabel">0 / 8 выполнено</div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="check-box">&check;</div>
+      <div><div class="check-text">&#128205; Ort und Datum написан справа вверху</div><div class="check-sub">M&ouml;nchengladbach, den 22. M&auml;rz 2026</div></div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="check-box">&check;</div>
+      <div><div class="check-text">&#128140; Anrede написана правильно</div><div class="check-sub">Liebe / Lieber + имя + запятая</div></div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="check-box">&check;</div>
+      <div><div class="check-text">&#128289; После Anrede &mdash; маленькая буква</div><div class="check-sub">Liebe Anna, ich... (не &laquo;Ich&raquo;!)</div></div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="check-box">&check;</div>
+      <div><div class="check-text">&#9997;&#65039; Есть вступление (Einleitung)</div><div class="check-sub">Почему пишу, как дела?</div></div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="check-box">&check;</div>
+      <div><div class="check-text">&#128214; Есть основная часть (Hauptteil)</div><div class="check-sub">Рассказ о событии, минимум 3 предложения</div></div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="check-box">&check;</div>
+      <div><div class="check-text">&#10067; Есть вопрос другу</div><div class="check-sub">Was hast du...? / Wie findest du...?</div></div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="check-box">&check;</div>
+      <div><div class="check-text">&#128075; Есть прощание (Gru&szlig;formel)</div><div class="check-sub">Viele liebe Gr&uuml;&szlig;e / Herzliche Gr&uuml;&szlig;e</div></div>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <div class="check-box">&check;</div>
+      <div><div class="check-text">&#9998;&#65039; Есть подпись</div><div class="check-sub">dein / deine + имя</div></div>
+    </div>
+    <div class="tip-box" style="margin-top:16px;">
+      <span>&#128161;</span>
+      <div style="font-size:0.82rem;">Когда всё отмечено &mdash; письмо готово! Можно ещё раз прочитать вслух &mdash; так легче найти ошибки.</div>
+    </div>
+  </div>
+</div>
+<script>
+function switchTab(n) {
+  document.querySelectorAll('.section').forEach(function(s,i) { s.classList.toggle('active', i===n); });
+  document.querySelectorAll('.tab').forEach(function(t,i) { t.classList.toggle('active', i===n); });
+}
+function toggleBlock(el) {
+  el.classList.toggle('open');
+}
+function answer(el, qid, correct, msg) {
+  var q = document.getElementById(qid);
+  if (q.dataset.done) return;
+  q.dataset.done = '1';
+  el.classList.add(correct ? 'correct' : 'wrong');
+  var fb = document.getElementById(qid + '-fb');
+  fb.textContent = (correct ? '\u2705 ' : '\u274C ') + msg;
+  fb.className = 'quiz-feedback show ' + (correct ? 'ok' : 'fail');
+}
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  updateProgress();
+}
+function updateProgress() {
+  var items = document.querySelectorAll('.checklist-item');
+  var done = document.querySelectorAll('.checklist-item.checked').length;
+  var pct = Math.round(done / items.length * 100);
+  document.getElementById('pbar').style.width = pct + '%';
+  document.getElementById('plabel').textContent = done + ' / ' + items.length + ' выполнено';
+}
+</script>
+</body>
+</html>

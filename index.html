@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MaximSchool — Немецкий язык</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FFD93D;
+    --orange: #FF6B35;
+    --green: #4CAF50;
+    --blue: #4A90D9;
+    --purple: #9C6FDE;
+    --red: #E74C3C;
+    --bg: #FFF8F0;
+    --card: #FFFFFF;
+    --text: #2D2D2D;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  header {
+    background: linear-gradient(135deg, #4A90D9 0%, #9C6FDE 100%);
+    padding: 32px 20px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '\1F393';
+    position: absolute;
+    font-size: 120px;
+    opacity: 0.1;
+    top: -10px;
+    right: -10px;
+  }
+  header h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: white;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+  }
+  header p {
+    color: rgba(255,255,255,0.9);
+    font-size: 1rem;
+    margin-top: 6px;
+    font-weight: 600;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 16px;
+  }
+  .class-section {
+    margin-bottom: 28px;
+  }
+  .class-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #555;
+  }
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .topic-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 20px 18px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    border-left: 5px solid var(--blue);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .topic-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  }
+  .topic-card.green { border-left-color: var(--green); }
+  .topic-card.purple { border-left-color: var(--purple); }
+  .topic-card.orange { border-left-color: var(--orange); }
+  .topic-card.red { border-left-color: var(--red); }
+  .topic-card.yellow { border-left-color: var(--yellow); }
+  .topic-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  .topic-name {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .topic-desc {
+    font-size: 0.82rem;
+    color: #888;
+    line-height: 1.4;
+  }
+  .topic-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 8px;
+    background: #E3F2FD;
+    color: #1565C0;
+  }
+  .topic-badge.grammar { background: #F3E5F5; color: #6A1B9A; }
+  .topic-badge.writing { background: #FFF3E0; color: #E65100; }
+  .topic-badge.vocab { background: #E8F5E9; color: #2E7D32; }
+  footer {
+    text-align: center;
+    padding: 20px;
+    color: #BBB;
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>MaximSchool</h1>
+  <p>Deutsch lernen — Материалы по немецкому языку</p>
+</header>
+<div class="container">
+
+  <div class="class-section">
+    <div class="class-title">4 Klasse</div>
+    <div class="topics-grid">
+      <a class="topic-card orange" href="topics/brief-schreiben.html">
+        <div class="topic-icon">&#9993;&#65039;</div>
+        <div class="topic-name">Brief schreiben</div>
+        <div class="topic-desc">Структура дружеского письма, примеры, типичные ошибки и тест</div>
+        <div class="topic-badge writing">Schreiben</div>
+      </a>
+      <!--
+        Чтобы добавить новую тему, скопируй блок ниже и заполни:
+
+        <a class="topic-card green" href="topics/FILENAME.html">
+          <div class="topic-icon">EMOJI</div>
+          <div class="topic-name">Название темы</div>
+          <div class="topic-desc">Краткое описание</div>
+          <div class="topic-badge grammar">Тип</div>
+        </a>
+
+        Цвета карточки: (без класса)=blue, green, purple, orange, red, yellow
+        Типы badge: grammar, writing, vocab, (без класса)=синий
+      -->
+    </div>
+  </div>
+
+  <!--
+    Чтобы добавить новый класс:
+
+    <div class="class-section">
+      <div class="class-title">3 Klasse</div>
+      <div class="topics-grid">
+        ... карточки тем ...
+      </div>
+    </div>
+  -->
+
+</div>
+<footer>MaximSchool &copy; 2026</footer>
+</body>
+</html>
