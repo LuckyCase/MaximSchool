@@ -100,6 +100,7 @@
   .tab:nth-child(3).active { background: var(--purple); }
   .tab:nth-child(4).active { background: var(--red); }
   .tab:nth-child(5).active { background: var(--orange); }
+  .tab:nth-child(6).active { background: #43A047; }
   /* CONTENT */
   .content { padding: 16px; max-width: 680px; margin: 0 auto; }
   .section { display: none; animation: fadeIn 0.3s ease; }
@@ -363,6 +364,85 @@
     transition: all 0.2s;
   }
   .letter-dot.active { background: var(--orange); transform: scale(1.3); }
+  /* THEORY STEPS */
+  .step-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    text-align: center;
+  }
+  .step-card .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: white;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+  .step-card .step-icon {
+    font-size: 2.4rem;
+    margin-bottom: 8px;
+  }
+  .step-card .step-text {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #444;
+  }
+  .step-card .step-text b { color: var(--text); }
+  .step-card.highlight {
+    background: #FFFDE7;
+    border: 2px solid var(--yellow);
+  }
+  .brief-visual {
+    background: #FFF9E6;
+    border: 2px dashed #E8A800;
+    border-radius: 12px;
+    padding: 20px 22px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    text-align: left;
+    max-width: 340px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .brief-visual .bv-label {
+    position: absolute;
+    right: -8px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    background: white;
+    border: 1px solid #DDD;
+    border-radius: 4px;
+    padding: 1px 5px;
+    color: #888;
+    white-space: nowrap;
+  }
+  .checklist-parts {
+    text-align: left;
+    max-width: 360px;
+    margin: 12px auto 0;
+  }
+  .checklist-parts li {
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+    line-height: 1.5;
+    list-style: none;
+    padding-left: 6px;
+  }
+  .checklist-parts li::before {
+    content: '\2022 ';
+    color: var(--orange);
+    font-weight: 700;
+  }
 </style>
 </head>
 <body>
@@ -372,15 +452,93 @@
   <p>Шпаргалка &bull; 4 Klasse &bull; Freundschaftsbrief</p>
 </header>
 <div class="tabs">
-  <div class="tab active" onclick="switchTab(0)">&#128208; Структура</div>
-  <div class="tab" onclick="switchTab(1)">&#128196; Пример</div>
-  <div class="tab" onclick="switchTab(2)">&#10060; Ошибки</div>
-  <div class="tab" onclick="switchTab(3)">&#129513; Тест</div>
-  <div class="tab" onclick="switchTab(4)">&#9989; Чеклист</div>
+  <div class="tab active" onclick="switchTab(0)">&#128218; Теория</div>
+  <div class="tab" onclick="switchTab(1)">&#128208; Структура</div>
+  <div class="tab" onclick="switchTab(2)">&#128196; Примеры</div>
+  <div class="tab" onclick="switchTab(3)">&#10060; Ошибки</div>
+  <div class="tab" onclick="switchTab(4)">&#129513; Тест</div>
+  <div class="tab" onclick="switchTab(5)">&#9989; Чеклист</div>
 </div>
 <div class="content">
-  <!-- TAB 1: СТРУКТУРА -->
+  <!-- TAB 0: ТЕОРИЯ -->
   <div class="section active" id="tab0">
+    <h2 class="section-head">&#128218; Wie schreibt man einen Brief?</h2>
+
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div class="step-icon">&#129300;</div>
+      <div class="step-text">
+        <b>Zuerst musst du dir &uuml;berlegen, wem du schreiben m&ouml;chtest.</b><br>
+        Сначала подумай, <b>кому</b> ты хочешь написать письмо.
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div class="step-icon">&#128161;</div>
+      <div class="step-text">
+        <b>Hast du dich entschieden? Dann solltest du als n&auml;chstes planen, was du schreiben m&ouml;chtest.</b><br>
+        Решил? Теперь спланируй, <b>о ч&euml;м</b> ты хочешь рассказать.
+      </div>
+    </div>
+
+    <div class="step-card highlight">
+      <div class="step-num">3</div>
+      <div class="step-icon">&#9997;&#65039;</div>
+      <div class="step-text">
+        <b>Du kannst in einem Brief etwas Wichtiges, Interessantes oder Witziges erz&auml;hlen.</b><br>
+        <b>Du kannst etwas berichten, was du erlebt hast.</b><br><br>
+        В письме можно рассказать что-то <b>важное</b>, <b>интересное</b> или <b>смешное</b>. Можно описать то, что ты пережил.
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <div class="step-icon">&#10067;</div>
+      <div class="step-text">
+        <b>Und du kannst nat&uuml;rlich auch Fragen stellen.</b><br>
+        А ещ&euml; можно <b>задавать вопросы</b> другу!
+      </div>
+    </div>
+
+    <div class="step-card" style="border: 2px solid var(--green);">
+      <div class="step-num" style="background: var(--green);">5</div>
+      <div class="step-icon">&#128233;</div>
+      <div class="step-text" style="text-align:left;">
+        <b>Wenn du einen Brief schreibst, sollte er folgende Dinge enthalten:</b><br><br>
+        <ul class="checklist-parts">
+          <li>In jedem Brief gibt es eine Angabe &uuml;ber <b>Ort und Datum</b> &mdash; место и дата</li>
+          <li>Eine h&ouml;fliche <b>Anrede</b> &mdash; вежливое обращение</li>
+          <li>Den <b>Text</b> &mdash; сам текст письма</li>
+          <li>Einen <b>Gru&szlig; zum Abschied</b> &mdash; прощание</li>
+          <li>Und <b>deinen Namen</b> &mdash; твоё имя (подпись)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-text">
+        <div class="brief-visual">
+          <div style="text-align:right; color:#888;">Berlin, 01.03.2017 <span class="bv-label" style="top:12px;">Ort + Datum</span></div>
+          <br>
+          <div>Lieber Alex, <span class="bv-label" style="top:58px;">Anrede</span></div>
+          <br>
+          <div>wie geht es dir? Mir geht es gut. Ich hoffe, wir sehen uns bald mal wieder. <span class="bv-label" style="top:115px;">Text</span></div>
+          <br>
+          <div>Viele Gr&uuml;&szlig;e <span class="bv-label" style="top:185px;">Gru&szlig;</span></div>
+          <div>Deine Mia <span class="bv-label" style="top:212px;">Name</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <span>&#128161;</span>
+      <div style="font-size:0.82rem;">Перейди на вкладку <b>&laquo;Структура&raquo;</b>, чтобы разобрать каждую часть письма подробнее!</div>
+    </div>
+  </div>
+
+  <!-- TAB 1: СТРУКТУРА -->
+  <div class="section" id="tab1">
     <h2 class="section-head">&#128208; Структура письма</h2>
     <p style="font-size:0.82rem;color:#888;margin-bottom:14px;">Нажми на блок, чтобы увидеть пример &#128071;</p>
     <div style="padding-left: 20px;">
@@ -426,7 +584,7 @@
     </div>
   </div>
   <!-- TAB 2: ПРИМЕРЫ ПИСЕМ -->
-  <div class="section" id="tab1">
+  <div class="section" id="tab2">
     <h2 class="section-head">&#128196; Примеры писем</h2>
     <div class="letter-nav">
       <button class="letter-nav-btn" onclick="showLetter(-1)" id="lprev">&#8592;</button>
@@ -562,7 +720,7 @@
     </div>
   </div>
   <!-- TAB 3: ОШИБКИ -->
-  <div class="section" id="tab2">
+  <div class="section" id="tab3">
     <h2 class="section-head">&#10060; Типичные ошибки</h2>
     <div class="error-item">
       <div class="error-icon">&#128205;</div>
@@ -614,7 +772,7 @@
     </div>
   </div>
   <!-- TAB 4: ТЕСТ -->
-  <div class="section" id="tab3">
+  <div class="section" id="tab4">
     <h2 class="section-head">&#129513; Мини-тест</h2>
     <div class="quiz-q" id="q1">
       <div class="quiz-question">1. Где пишется дата в письме?</div>
@@ -663,7 +821,7 @@
     </div>
   </div>
   <!-- TAB 5: ЧЕКЛИСТ -->
-  <div class="section" id="tab4">
+  <div class="section" id="tab5">
     <h2 class="section-head">&#9989; Чеклист перед сдачей</h2>
     <p style="font-size:0.82rem;color:#888;margin-bottom:12px;">Отмечай каждый пункт, когда проверишь</p>
     <div class="progress-bar-wrap"><div class="progress-bar" id="pbar" style="width:0%"></div></div>
