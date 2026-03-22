@@ -1348,7 +1348,19 @@ function selectGapWord(el) {
 }
 
 function fillGap(slot) {
+  // If no word selected and slot is filled — remove word from slot
+  if (!selectedGapWord && slot.classList.contains('filled')) {
+    var prevWord = slot.dataset.filledWord;
+    document.querySelectorAll('.gap-word').forEach(function(w) {
+      if (w.dataset.word === prevWord) { w.classList.remove('used'); }
+    });
+    slot.textContent = '_____';
+    slot.dataset.filledWord = '';
+    slot.classList.remove('filled', 'correct-slot', 'wrong-slot');
+    return;
+  }
   if (!selectedGapWord) return;
+  // If slot already has a word — return it first
   if (slot.classList.contains('filled')) {
     var prevWord = slot.dataset.filledWord;
     document.querySelectorAll('.gap-word').forEach(function(w) {
