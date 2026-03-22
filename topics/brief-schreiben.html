@@ -1061,15 +1061,13 @@
     <div class="env-task" id="env-task">&#128073; Klicke auf: <b>Briefmarke</b> <span class="spoiler" data-ru="марка"></span></div>
     <div class="envelope" id="envelope">
       <div class="env-stamp" onclick="envClick('stamp')" id="env-stamp">&#128235;</div>
-      <div class="env-zone" onclick="envClick('absender')" id="env-absender" style="margin-bottom:20px;">
-        Anton Weber<br>
-        Industriestr. 99<br>
-        09143 Chemnitz
+      <div style="margin-bottom:20px;">
+        <div class="env-zone" onclick="envClick('abs-name')" id="env-abs-name" style="display:inline-block;">Anton Weber</div><br>
+        <div class="env-zone" onclick="envClick('abs-addr')" id="env-abs-addr" style="display:inline-block;">Industriestr. 99<br>09143 Chemnitz</div>
       </div>
-      <div class="env-zone" onclick="envClick('empfaenger')" id="env-empfaenger" style="text-align:center; margin-top:20px;">
-        Frieda Severin<br>
-        Kemptener Str. 33<br>
-        87629 F&uuml;ssen
+      <div style="text-align:center; margin-top:20px;">
+        <div class="env-zone" onclick="envClick('emp-name')" id="env-emp-name" style="display:inline-block;">Frieda Severin</div><br>
+        <div class="env-zone" onclick="envClick('emp-addr')" id="env-emp-addr" style="display:inline-block;">Kemptener Str. 33<br>87629 F&uuml;ssen</div>
       </div>
     </div>
     <div class="quiz-feedback" id="env-fb" style="margin-top:8px;"></div>
@@ -1416,16 +1414,17 @@ initGaps();
 /* ===== ENVELOPE EXERCISE ===== */
 var envTasks = [
   { id: 'stamp', label: 'Briefmarke', ru: '\u043C\u0430\u0440\u043A\u0430' },
-  { id: 'absender', label: 'Absender', ru: '\u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u0435\u043B\u044C' },
-  { id: 'empfaenger', label: 'Empf\u00e4nger', ru: '\u043F\u043E\u043B\u0443\u0447\u0430\u0442\u0435\u043B\u044C' }
+  { id: 'abs-name', label: 'Name des Absenders', ru: '\u0438\u043C\u044F \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u0435\u043B\u044F' },
+  { id: 'abs-addr', label: 'Adresse des Absenders', ru: '\u0430\u0434\u0440\u0435\u0441 \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u0435\u043B\u044F' },
+  { id: 'emp-name', label: 'Name des Empf\u00e4ngers', ru: '\u0438\u043C\u044F \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u0435\u043B\u044F' },
+  { id: 'emp-addr', label: 'Adresse des Empf\u00e4ngers', ru: '\u0430\u0434\u0440\u0435\u0441 \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u0435\u043B\u044F' }
 ];
 var envStep = 0;
 
 function envClick(part) {
   if (envStep >= envTasks.length) return;
   var task = envTasks[envStep];
-  var elId = part === 'stamp' ? 'env-stamp' : 'env-' + part;
-  var el = document.getElementById(elId);
+  var el = document.getElementById('env-' + part);
   var fb = document.getElementById('env-fb');
 
   if (part === task.id) {
