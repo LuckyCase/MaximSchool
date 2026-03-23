@@ -1058,7 +1058,7 @@
 
     <!-- BRIEFUMSCHLAG -->
     <div class="exercise-title">&#9993;&#65039; Briefumschlag <span class="spoiler" data-ru="Найди части конверта"></span></div>
-    <div class="env-task" id="env-task">&#128073; Klicke auf: <b>Briefmarke</b> <span class="spoiler" data-ru="марка"></span></div>
+    <div class="env-task" id="env-task"></div>
     <div class="envelope" id="envelope">
       <div class="env-stamp" onclick="envClick('stamp')" id="env-stamp">&#128235;</div>
       <div style="margin-bottom:20px;">
@@ -1235,9 +1235,16 @@ var sortItems = [
 ];
 var selectedChip = null;
 
+// Seeded random based on time for varied shuffles
+var _seed = Date.now();
+function seededRandom() {
+  _seed = (_seed * 9301 + 49297) % 233280;
+  return _seed / 233280;
+}
 function shuffleArr(a) {
+  _seed = Date.now();
   for (var i = a.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
+    var j = Math.floor(seededRandom() * (i + 1));
     var t = a[i]; a[i] = a[j]; a[j] = t;
   }
   return a;
@@ -1412,14 +1419,33 @@ function checkGaps() {
 initGaps();
 
 /* ===== ENVELOPE EXERCISE ===== */
-var envTasks = [
+var envTasksAll = [
   { id: 'stamp', label: 'Briefmarke', ru: '\u043C\u0430\u0440\u043A\u0430' },
   { id: 'abs-name', label: 'Name des Absenders', ru: '\u0438\u043C\u044F \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u0435\u043B\u044F' },
   { id: 'abs-addr', label: 'Adresse des Absenders', ru: '\u0430\u0434\u0440\u0435\u0441 \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u0435\u043B\u044F' },
   { id: 'emp-name', label: 'Name des Empf\u00e4ngers', ru: '\u0438\u043C\u044F \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u0435\u043B\u044F' },
   { id: 'emp-addr', label: 'Adresse des Empf\u00e4ngers', ru: '\u0430\u0434\u0440\u0435\u0441 \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u0435\u043B\u044F' }
 ];
+var envTasks = [];
 var envStep = 0;
+
+function initEnvelope() {
+  envTasks = envTasksAll.slice();
+  shuffleArr(envTasks);
+  envStep = 0;
+  // reset visuals
+  ['env-stamp','env-abs-name','env-abs-addr','env-emp-name','env-emp-addr'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('env-correct','env-wrong');
+  });
+  var taskEl = document.getElementById('env-task');
+  taskEl.style.background = '';
+  taskEl.style.color = '';
+  var t = envTasks[0];
+  taskEl.innerHTML = '\uD83D\uDC49 Klicke auf: <b>' + t.label + '</b> <span class="spoiler" data-ru="' + t.ru + '"></span>';
+  initSpoilers(taskEl);
+  document.getElementById('env-fb').className = 'quiz-feedback';
+}
 
 function envClick(part) {
   if (envStep >= envTasks.length) return;
@@ -1453,6 +1479,8 @@ function envClick(part) {
     setTimeout(function() { el.classList.remove('env-wrong'); }, 800);
   }
 }
+
+initEnvelope();
 </script>
 </body>
 </html>
